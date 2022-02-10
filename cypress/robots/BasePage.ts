@@ -1,7 +1,25 @@
 /// <reference types="Cypress" />
 import '../support/index';
 
-export abstract class BaseEyes {
+export class BasePage {
+  visitUrl(url: string) {
+    const HOST = Cypress.env('APP_URL');
+    cy.visit(`${HOST}${url}`);
+    return this;
+  }
+
+  accessUrl(url: string) {
+    cy.visit(`${url}`);
+    return this;
+  }
+
+  login() {
+    cy.get('#email').type(Cypress.env('USER_NAME'));
+    cy.get('#password').type(Cypress.env('PASSWORD'));
+    cy.get('#login_submit').click();
+    return this;
+  }
+
   seesTextWithId(id: string, text: string) {
     cy.get(`#${id}`).should('have.text', text);
     return this;
@@ -133,9 +151,7 @@ export abstract class BaseEyes {
     cy.get(dom).should('not.be.disabled');
     return this;
   }
-}
 
-export class BaseHands {
   clickOnId(id: string) {
     cy.get(`#${id}`).click();
     return this;
@@ -200,26 +216,29 @@ export class BaseHands {
     cy.wait(milliSecs);
     return this;
   }
-}
 
-export class BaseDependencies {
-  visitUrl(url: string) {
-    const HOST = Cypress.env('APP_URL');
-    cy.visit(`${HOST}${url}`);
+  // added classes
+
+  seesTextOnSelectedElement(domElement: string,value: string){
+    cy.get(domElement).should('have.text',value);
     return this;
   }
 
-  accessUrl(url: string) {
-    cy.visit(`${url}`);
+  seesClassOnDomElement(domElement: string,className: string){
+    cy.get(domElement).should('have.class',className);
     return this;
   }
 
-  login() {
-    cy.get('#email').type(Cypress.env('USER_NAME'));
-    cy.get('#password').type(Cypress.env('PASSWORD'));
-    cy.get('#login_submit').click();
+  clickOnElement(element: string) {
+    cy.get(element).click({force: true});
     return this;
   }
+
+  typeTextOnSelectedElement(domElement: string,value: string){
+    cy.get(domElement).type(value);
+    return this;
+  }
+
 }
 
 type PositionType =
