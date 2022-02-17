@@ -1,5 +1,5 @@
 import VendorsResourcePage from '/home/abhiy/vscode/Cypress/Cypress_Strateos_Assignment/cypress/robots/strateos/vendors_resource_tab/VendorsResourcePage.ts';
-
+import VendorsResourceTab from '/home/abhiy/vscode/Cypress/Cypress_Strateos_Assignment/cypress/fixtures/locators/vendors_resource_tab.json';
 context('Strateos Vendors Resource Tab Test', () => {
 const Page = new VendorsResourcePage();
 
@@ -8,21 +8,21 @@ const Page = new VendorsResourcePage();
         it("should create a new resource of type ChemicalStructure and test the filter resources filter", () => {
             Page.visitStrateos();
             Page.login();
-            Page.clickOnMenu('.subtabs__tab-link > span');
-            Page.clickOnVendors(':nth-child(2) > .input-suggestions__suggestion-content > .input-suggestions__suggestion-content-text > .submenu-link__dropdown-item');
-            Page.clickOnResourceSubtab('.page-layout__tabs > .subtabs > :nth-child(3) > .subtabs__tab-link');
-            Page.clickOnAddResourceButton('.tx-stack__block--sm > .btn > .btn__content');
-            Page.enterNameOfTheResource('.text-input','Resource123');
-            Page.selectKindOfResource(':nth-child(2) > .labeled-input > .select > .select-input__container > .select-input__wrapper');
-            Page.selectChemicalStructure(':nth-child(2) > .input-suggestions__suggestion-content > .input-suggestions__suggestion-content-text');
-            Page.clickOnLinkCompundButton('.labeled-input > .btn > .btn__content');
-            Page.addLinkCompound(':nth-child(1) > :nth-child(1) > .amino-table__cell-content > .tx-checkbox > .tx-checkbox__content > .tx-checkbox__icon-container > .fa');
-            Page.clickOnAddButton('.create-org > .btn__content');
-            Page.clickKindFilterDropDown(':nth-child(1) > :nth-child(1) > .search-filter-bar-title-wrapper > .search-filter-wrapper__title > .fa');
-            Page.selectChemicalStructure(':nth-child(1) > :nth-child(1) > .search-filter-wrapper__vertical-options > .search-filter > .radio-group > :nth-child(2) > .tx-radio__content > .tx-radio__toggle');
-            Page.clickStorageConditionDropDown(':nth-child(2) > :nth-child(1) > .search-filter-bar-title-wrapper > .search-filter-wrapper__title > .fa');
-            Page.selectCold_4(':nth-child(2) > :nth-child(1) > .search-filter-wrapper__vertical-options > .search-filter > .radio-group > :nth-child(3) > .tx-radio__content > .tx-radio__toggle');
-            Page.assertResource(':nth-child(1) > .resource-card__card','Resource123');
+            Page.clickOnMenu(VendorsResourceTab.menu);
+            Page.clickOnVendors(VendorsResourceTab.vendors_tab);
+            Page.clickOnResourceSubtab(VendorsResourceTab.vendors_resource_subtab);
+            Page.clickOnAddResourceButton(VendorsResourceTab.add_resource_btn);
+            Page.enterNameOfTheResource(VendorsResourceTab.resource_name_input,'Resource123');
+            Page.selectKindOfResource(VendorsResourceTab.resource_kind_dropdown);
+            Page.selectChemicalStructure(VendorsResourceTab.chemical_structure_option);
+            Page.clickOnLinkCompundButton(VendorsResourceTab.link_compound_btn);
+            Page.addLinkCompound(VendorsResourceTab.select_link_compound);
+            Page.clickOnAddButton(VendorsResourceTab.add_link_compound);
+            Page.clickKindFilterDropDown(VendorsResourceTab.kind_filter_dropdown);
+            Page.selectChemicalStructure(VendorsResourceTab.kind_filter_chemical_structure_option);
+            Page.clickStorageConditionDropDown(VendorsResourceTab.storage_condition_dropdown);
+            Page.selectCold_4(VendorsResourceTab.storage_condition_cold4_option);
+            Page.assertResource(VendorsResourceTab.resource_card,'Resource123');
         });
     });
 });
